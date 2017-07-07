@@ -11,12 +11,18 @@ loc <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR
 temp <- tempfile()
 download.file(loc,temp)
 
+###NEW###
+con <- unz(temp, "UCI HAR Dataset/features.txt")
+cur <- read.table(con, sep="")
+features_list <- as.vector(cur[,2]) ##Size=561
+
+
+####STOP NEW####
+
 ####Loading and manipulating the signal vectors for the test data
 
 con <- unz(temp, "UCI HAR Dataset/test/Inertial Signals/total_acc_x_test.txt")
-cur <- read.table(con, sep="")
-total_acc_x_test <- as.list(lapply(
-        seq_len(nrow(cur)), function(i) cur[i,]))
+total_acc_x_test <- read.table(con, sep="")
 
 con <- unz(temp, "UCI HAR Dataset/test/Inertial Signals/total_acc_y_test.txt")
 total_acc_y_test <- read.table(con, sep="")
