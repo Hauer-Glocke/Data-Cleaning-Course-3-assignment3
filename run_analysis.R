@@ -91,11 +91,14 @@ names(df) <- df_temp
 
 rm(df_temp)
 
-###STEP5####
-#Create Summary Dataset - Step 5  ###OLD####
+#Create Summary Dataset
+#Step 5
 df_summary <- df %>%
         group_by(subject,activities) %>%
         summarise_each(funs(mean))
+
+#Cleaning up
+rm(con, loc, temp)
 
 #Create txt-file
 write.table(df_summary, file="tidy_data_step5.txt", row.name=FALSE)
